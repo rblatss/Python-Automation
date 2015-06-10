@@ -1,14 +1,11 @@
-ï»¿''' ****************************************************************
+''' ****************************************************************
 
 							Get Job Titles 
   ----------------------------------------------------------------
   I should have written this at the start of my job search. Pretty
-  simple idea, but might be real tricky to implement. This script
+  simple idea, but might be tricky to implement. This script
   will automate my search for openings at a company by matching 
   patterns to position titles on indeed.com.
-  
-  Input company name. Formatted list of titles that i might 
-  qualify for. 
   
   At this point, the script only verifies that a keyword, from 
   list of keywords below, is in the position title.
@@ -17,43 +14,39 @@
   (c++, python, linux, unix, related degree, electrical engineering
    etc.)
   
-  jsearch(...)
-  	jsearch(string) --> strings is name of company
-  
   Procedure (4 steps):
     1) search "company name" on indeed.com
 	
 		btw: url dissected
 		http://www.youtube.com/watch?v=DBJ7mBxi8LM&list=FLjtfXY-PoLnBtJTrAVIHR3A&index=5
 
-			Protocol – http://
+			Protocol â€“ http://
 			
-			Subdomain – www.
+			Subdomain â€“ www.
 			
-			Domain – youtube.com/
+			Domain â€“ youtube.com/
 			
-			Path to file – watch
+			Path to file â€“ watch
 			
-			Query string – ?v=DBJ7mBxi8LM&list=FLjtfXY-PoLnBtJTrAVIHR3A&index=5
+			Query string â€“ ?v=DBJ7mBxi8LM&list=FLjtfXY-PoLnBtJTrAVIHR3A&index=5
 			(name/value pairs!!)
 	
 		From:
 			http://maps.google.com/maps?q=62+4th+St+NW,+Winter+Haven,+FL&hl=en&sll=27.698638,-83.804601&sspn=22.576023,34.453125&oq=62+4th+st+nw,+&hnear=62+4th+St+NW,+Winter+Haven,+Florida+33881&t=m&z=17
 		To:
 			http://maps.google.com/maps?q=62+4th+St+NW,+Winter+Haven,+FL
+		* These are the same
 	
-	
-	2) skim thru position titles (what is common html attribute of job
-	    posting links??)
+	2) skim thru position titles
 	3) go to next page
-	4) repeat prev 2 until no more next
+	4) repeat prev 2 until no more next pages
   
   to do:
-	why does + become %2B ??? -- > encodings
-	validate that company of job posting is company searched
+	1) replace CorrectURL with more pythonic code
+	2) validate that company of job posting is company searched
 		maybe try regex to look for title w/o certain postfix/prefix!!
 		instead of searching for affirmative
-	parse job descriptions and match based on job requirements
+	3) parse job descriptions and match based on job requirements
   
   Criteria for a match:
 	keywords:
@@ -69,6 +62,7 @@
   	  recent grad
   	  junior
   	  jr.
+  	  
 	  (postfix)
 	  i
 	  I
