@@ -1,4 +1,4 @@
-ï»¿''' ****************************************************************
+''' ****************************************************************
 
 							Get Job Titles 
   ----------------------------------------------------------------
@@ -19,15 +19,15 @@
 		btw: url dissected
 		http://www.youtube.com/watch?v=DBJ7mBxi8LM&list=FLjtfXY-PoLnBtJTrAVIHR3A&index=5
 
-			Protocol – http://
+			Protocol â€“ http://
 			
-			Subdomain – www.
+			Subdomain â€“ www.
 			
-			Domain – youtube.com/
+			Domain â€“ youtube.com/
 			
-			Path to file – watch
+			Path to file â€“ watch
 			
-			Query string – ?v=DBJ7mBxi8LM&list=FLjtfXY-PoLnBtJTrAVIHR3A&index=5
+			Query string â€“ ?v=DBJ7mBxi8LM&list=FLjtfXY-PoLnBtJTrAVIHR3A&index=5
 			(name/value pairs!!)
 	
 		
