@@ -1,4 +1,4 @@
-''' ****************************************************************
+ï»¿''' ****************************************************************
 
 							Get Job Titles 
   ----------------------------------------------------------------
@@ -19,15 +19,15 @@
 		btw: url dissected
 		http://www.youtube.com/watch?v=DBJ7mBxi8LM&list=FLjtfXY-PoLnBtJTrAVIHR3A&index=5
 
-			Protocol â€“ http://
+			Protocol – http://
 			
-			Subdomain â€“ www.
+			Subdomain – www.
 			
-			Domain â€“ youtube.com/
+			Domain – youtube.com/
 			
-			Path to file â€“ watch
+			Path to file – watch
 			
-			Query string â€“ ?v=DBJ7mBxi8LM&list=FLjtfXY-PoLnBtJTrAVIHR3A&index=5
+			Query string – ?v=DBJ7mBxi8LM&list=FLjtfXY-PoLnBtJTrAVIHR3A&index=5
 			(name/value pairs!!)
 	
 		
@@ -75,7 +75,6 @@ res = requests.get(search_url + "/jobs", query)
 # Criteria for a match (job title, correct company name)
 main = r"[A-z0-9\s]*(([Ss]oftware)|([Ee]lectrical))+\s?(Development)?\s?([Ee]ngineer|[Dd]eveloper)+[A-z0-9\s]*"
 jobtitle = re.compile(main)
-company = ' '.join(sys.argv[2:])
 
 # Function used to replace %2B w/ + in URL
 def CorrectURL(url):
@@ -101,7 +100,7 @@ while(next_page):
 		a = tag.findChild('a')
 		if a['itemprop'] != [] and a['itemprop'] == 'title':
 			if re.match(jobtitle, a.text) != None:
-				print a.text.encode("utf8")
+				print a.text.encode("utf8") + " - " + tag.next_sibling.next_sibling.text
 	
 	# Go to next page
 	if soup.find_all('span', text=re.compile(r'^Next')) != []: # verify there's a next page
