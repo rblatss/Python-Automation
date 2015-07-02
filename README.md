@@ -1,3 +1,6 @@
 # Python-Automation
 
-This repository contains some useful python scripts that I wrote. Currently, its contents are limited (ie 1 script, which passes a query to indeed.com and scrapes thru job postings in the 98136 area).
+This repository contains some useful python scripts that I wrote. Common tasks i'm interested in automating include:
+- Web scraping
+- Unit/Integration Testing
+- General file manipulation
