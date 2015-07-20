@@ -1,4 +1,5 @@
-﻿import os, re
+﻿# Script to replace cci prefix to ctci in filename
+import os, re
 
 dir = os.getcwd()
 pattern = re.compile(r'^cci')
