@@ -1,13 +1,13 @@
 ﻿''' ****************************************************************
 
-						Find a Job via Indeed
-		-----------------------------------------------------
+			Find a Job via Indeed
+	-----------------------------------------------------
   Procedure:
     0) read query name and search it via indeed.com	
     1) create output txt file for query
-	2) skim thru position titles and write to text
-	3) go to next page
-	4) repeat prev 2 until no more next
+    2) skim thru position titles and write to text
+    3) go to next page
+    4) repeat prev 2 until no more next
     5) repeat 0 - 4 for all queries
 	
 **************************************************************** '''
