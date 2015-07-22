@@ -21,7 +21,7 @@ def CorrectURL(url):
 
 def main():
 	try:
-		os.mkdir('jobs')
+		os.mkdir('../data/jobs')
 	except OSError:
 		pass
 	
