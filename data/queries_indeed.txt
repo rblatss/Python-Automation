@@ -15,7 +15,6 @@ DatStat
 DocuSign
 EMC
 EnergySavvy
-Evidence
 Expedia
 F5 Networks
 Groundspeak
@@ -37,13 +36,13 @@ Oculus VR
 Oracle
 Paperg
 Payscale Inc.
-Philips
 Placed Inc
 Predixion software
 ProQuest
 Quidsi, Inc.
 Qumulo
 REI
+RealNetworks
 Redfin
 Rgen solutions
 SEOmoz
@@ -60,13 +59,4 @@ Whitepages
 Zillow
 Zulily
 thePlatform
-software engineer -amazon -google -microsoft
-software developer -amazon -google -microsoft
-electrical engineer -amazon -google -microsoft
-entry level engineer
-junior engineer
-c++ software engineer -amazon -google -microsoft
-entry level c++ software developer -amazon -google -microsoft
-entry level c++ software engineer -amazon -google -microsoft
-jr c++ software developer -amazon -google -microsoft
-jr c++ software engineer -amazon -google -microsoft
+c++ and ( (entry level) or junior or jr. or graduate) and software and (engineer or developer) not (amazon or senior or sr. or lead or principal)

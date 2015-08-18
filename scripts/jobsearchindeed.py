@@ -21,12 +21,12 @@ def CorrectURL(url):
 
 def main():
 	try:
-		os.mkdir('../data/jobs')
+		os.mkdir('../data/jobs_indeed')
 	except OSError:
 		pass
 	
 	# Read query names
-	file_handle = open("../data/queries.txt", 'r')
+	file_handle = open("../data/queries_indeed.txt", 'r')
 	queries_list = file_handle.readlines()
 	file_handle.close()
 	
@@ -50,7 +50,7 @@ def main():
 		i = 1
 		next_page = True
 	
-		output = open(os.path.join('jobs', query + ".txt"), 'w')
+		output = open(os.path.join('../data/jobs_indeed', query + ".txt"), 'w')
 		while(next_page):
 			try:
 				res.raise_for_status() # halt if content is bad

@@ -1,0 +1,244 @@
+STUFF IVE LEARNED
+---------------------------------
+ctci13.cc
+    oooo! oooo!
+    
+    ** If you call memset for something that is not an array of char,
+       for example an array of int, then the resulting values may be
+       TRAP REPRESENTATIONS and reading them may cause undefined
+       behavior.
+    	
+    	bit patterns that fit into the space occupied by a type, but 
+    	trigger undefined behavior if used as a value of that type
+    	cause undefined behavior if you merely read them using the type 
+    	that has the trap representation
+    	
+    	btw: NULL pointer is only undefined when dereferenced or offset,
+    	     but comparisons/copies are well-defined
+ctci14(2).cc
+	    5 BIG lessons:
+		never c cast malloc if you use PURE c
+			 1) void * automatically and safely promoted to correct value
+			 2) it can hide an error if you forgot to include stdlib.h
+			 3) it adds clutter
+			 4) it makes you repeat yourself
+			 
+			 ** in c++, the cast is required (c and c++ are SEPARATE languages)!!!!
+							  
+	    cant free pointer that was not initially allocated by malloc, calloc or realloc
+	    if you want to change value of pointer (as opposed to the ACTUAL VALUE POINTED TO), pass pointer by reference (ie *&)
+		instead of malloc(length*sizeof(char)) use malloc(length * sizeof * ptr_name)
+		there is NO general solution to catching error thrown by malloc
+ctci14.cc
+  
+	check out http://www.augustcouncil.com/~tgibson/tutorial/iotips.html for some tips on c++ i/o!!
+	also read last 3 sections: http://www.cplusplus.com/doc/tutorial/pointers/
+	
+	Memory leaks vs. dangling pointers (for the LAST time!!):
+	- memory leak = memory is allocated but cant be accessed! the pointer is out of scope!
+					eg char *byte; byte = new char[0]; return; // lol
+	- dangling pointer = points to memory thats already been freed (storage no longer allocated -> segmentation fault!)
+						eg returning address of a local variable, which has gone out of scope!
+						eg int *c = new int[0]; free(c); *c = 3; // dangling pointer!
+	
+	More about pointers (http://www.augustcouncil.com/~tgibson/tutorial/ptr.html)
+	2 distinct steps to displaying a variable on the stack to the screen (in c and c++)
+		1. program grabs address reserved for variable
+		2. program retrieves value stored at that address
+	aka the following operators
+		1. & address
+		2. * value
+		
+	btw this is crazy
+	1: #include <iostream>
+	2: void somefunc(unsigned long int fptr)
+	3: {
+	4:   *(float*)fptr=99.9; // b/c compiler expects a special integer designed to hold the address of a float (casting)
+	5: }
+	6:
+	7: int main()
+	8: {
+	9:   float fl=3.14;
+	10:   unsigned long int addr=(unsigned long int) &fl;
+	11:   somefunc(addr);
+	12:   std::cout << fl << std::endl;
+	13:   return 0;
+	14: }
+	i had no idea pass by reference could be performed like this	
+	** you pass the address to somefunc!! 
+	
+	instructors brag that there are few keywords in c??
+	
+	new/delete vs malloc/free:
+	- new/delete call ctor/dtor
+	- malloc/free do not
+	- delete(void *) free's memory like free (dtor not invoked)
+	- free(var), where var allocated by new, may cause crash and vice versa
+	* stay consistent to reduce dependencies and load time (by a smidgin'...)
+						
+	* Suggestion!: Only use delete when writing a smart pointer or container 
+	(http://stackoverflow.com/questions/5415302/initialize-c-pointers-to-zero-after-we-delete)
+	
+	on for loop to copy phrase -> newPhrase
+	* ',' has the lowest possible precedence!
+		eg
+		int i=0;
+		int a=5;
+		int x=0;
+		
+		for(i=0; i<5; x=(i++,a++)){
+			printf("i=%d a=%d x=%d\n",i,a,x);
+		}
+		
+		evaluates:
+			i=0 a=5 x=0
+			i=1 a=6 x=5
+			i=2 a=7 x=6
+			i=3 a=8 x=7
+			i=4 a=9 x=8
+		
+	see: http://en.cppreference.com/w/cpp/language/operator_precedence for details
+	
+	don't mix up NULL and '\0'
+   
+ctci15.cc
+
+	 add 49 to convert '1' to 1 (char to int)
+	 printf("%.*s", stringLength, pointerToString); // display without null terminator
+   
+ctci16.cc
+    sizeof() returns 4 bytes when argument is pointer allocated on the heap
+  
+ctci17.cc
+   - 2d matrix init -> first allocation is # rows, 2nd columns
+   - inidices [1][2] is row [1] and column [2]
+   
+   - infinite loop -> runtime error	
+   - access out of bounds element -> runtime error
+   
+   - the solution below works, but consider the values that an array
+     needs to hold. If an array is allocated for char's, each element
+	 is a byte, which is not enough space to hold 10. Also, 0 == 48,
+	 1 == 49 according to ASCII char!
+	
+   - more on character encoding http://www.cprogramming.com/tutorial/unicode.html
+	 and http://stackoverflow.com/questions/526430/c-programming-how-to-program-for-unicode
+	  * unicode passed as 32 bit integers (eg 4 byte) and first 128 == ascii
+	  - UTF-8 is multi-byte; requires variable # of bytes (ake utf 8 sequence)
+	  - UTF-8 is becoming ubiquitous (used for filenames in linux and supported by all mainstream web browsers)
+	  
+   - 255 == 0b11111111 == 0xFF == 1 byte and 256 == 0x100 == 2 bytes to store
+   - 2 bytes == 16 bits == 65,536 values, 65,536*17 (planes) = 1,114,112 values represented by unicode
+ 
+
+ctci18.cc
+   - #include "" -> 1st checks local dir, then system paths 
+   - #include <> -> starts search w/ system headers (dirs pre-designated by compiler)
+   
+   - associativity of operators != order of evaluation http://en.cppreference.com/w/cpp/language/eval_order
+  
+   - HOLY SHIT! allocating array of len 3 on heap creates array from 0-2.
+     Assigning element at index 3 is undefined??
+
+   - sizeof() return 4 bytes for 32 bit system, 8 bytes for 64
+  
+  on std::string string's:
+   - std::string s1 == std::string s2; // comparison is probably O(n) time complexity
+   - size() == length()
+   - == to compare strings, [] to access elements
+   - insert() to put chars in middle of word
+   - append() to put chars at end
+   
+ctci131.cc
+    stream.clear() --> reset eofbit after file is read once!
+	
+ctci23.cc
+  (http://stackoverflow.com/questions/22642698/difference-between-setting-a-node-equal-to-null-vs-deleting-a-node)
+  
+   No, it is not the same. delete X; statement actually calls a 
+   destructor of the object pointed by X and releases/frees the 
+   memory previously allocated for that object by operator new.
+   
+   The X = NULL; statement simply assigns addres 0x0 to the pointer 
+   X and neither destroys the object pointed by X nor releases the 
+   memory as opposed to delete.
+
+	
+ctci24.cc
+    - srand -> seed random number generator (eg srand(time(NULL)), time from ctime header )
+	- rand() -> cstdlib
+	
+ctci25.cc
+	
+  
+	
+ctci26.cc
+    std::setw(n) needs to be used for each line to be indented by n characters
+	
+ctci27.cc
+	
+ctci32.cc
+    what's preferred method to indicate failure? NULL??
+    
+    	In c
+	  
+	    For non-pointer success/fail:
+	    
+	    	0 => success
+	    	-1 => fail
+	    
+	    For pointer functions:
+	    
+	    	NULL => fail
+	    	everything else => success
+    
+    1) MYAPI_ERROR getObjectSize(MYAPIHandle h, int* returnedSize);
+         vs.
+    2) int getObjectSize(MYAPIHandle h, MYAPI_ERROR* returnedError);
+	  
+    which means someone has to use them like this:
+    
+    1) int size;
+       if(getObjectSize(h, &size) != MYAPI_SUCCESS) {
+         // Error handling
+       }
+	  
+    2) MYAPIError error;
+       int size;
+       size = getObjectSize(h, &error);
+       if(error != MYAPI_SUCCESS) {
+         // Error handling
+       }
+	
+    also consider:
+      - store all possible error-states in one typedef'ed enum and use
+    	it in your lib. Don't just return ints or even worse, mix ints
+	    or different enumerations with return-codes.
+      - provide a function that converts errors into something human 
+	    readable. Can be simple. Just error-enum in, const char* out. 
+      - I know this idea makes multithreaded use a bit difficult, but 
+	    it would be nice if application programmer can set an global 
+	    error-callback. That way they will be able to put a breakpoint
+	    into the callback during bug-hunt sessions.
+	   
+    some wisdom:
+    
+      " If the only possible errors are programmer errors, don't return
+	  an error code, use asserts inside the function " ...
+    
+      assert will terminate the program (usually with a message quoting
+	  the assert statement) if its argument turns out to be false. it's
+	  commonly used during debugging to make the program fail more 
+	  obviously if an unexpected condition occurs.
+	    
+      eg
+	  
+	    passing NULL pointer to function
+	    
+	    Pragmatic Programmer in its Design by Contract section 
+	    (chapter 4) says it's the caller responsibility to pass good
+	    data (pg 111 and 115) and suggests using Assertions in the 
+	    method to verify the sam
+	    
+	    validate user input!!!
+	    assert programmer input !!!
